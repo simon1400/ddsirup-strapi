@@ -17,8 +17,12 @@
   },
   "attributes": {
     "name": {
-      "pluginOptions": { "i18n": { "localized": true } },
       "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
       "required": true
     },
     "slug": {
@@ -26,13 +30,13 @@
       "targetField": "name",
       "required": true
     },
-    "description": {
-      "pluginOptions": { "i18n": { "localized": true } },
-      "type": "richtext"
-    },
     "shortDescription": {
-      "pluginOptions": { "i18n": { "localized": true } },
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "price": {
       "type": "decimal",
@@ -56,13 +60,17 @@
       "type": "media",
       "multiple": true,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "thumbnail": {
       "type": "media",
       "multiple": false,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "category": {
       "type": "relation",
@@ -72,8 +80,8 @@
     },
     "variants": {
       "type": "component",
-      "repeatable": true,
-      "component": "shop.product-variant"
+      "component": "shop.product-variant",
+      "repeatable": true
     },
     "featured": {
       "type": "boolean",
@@ -84,12 +92,61 @@
       "min": 0
     },
     "seoTitle": {
-      "pluginOptions": { "i18n": { "localized": true } },
-      "type": "string"
+      "type": "string",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
     },
     "seoDescription": {
-      "pluginOptions": { "i18n": { "localized": true } },
-      "type": "text"
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "description": {
+      "type": "customField",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
+    },
+    "infoBoxes": {
+      "type": "component",
+      "component": "shop.product-info-box",
+      "repeatable": true,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "ingredients": {
+      "type": "text",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      }
+    },
+    "countryOfOrigin": {
+      "type": "string"
+    },
+    "madeIn": {
+      "type": "string"
+    },
+    "relatedProducts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product"
     }
   }
 }

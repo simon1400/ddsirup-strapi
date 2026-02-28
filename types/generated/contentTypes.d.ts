@@ -563,10 +563,17 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         },
         number
       >;
+    countryOfOrigin: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -574,11 +581,24 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       }>;
     featured: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
     images: Schema.Attribute.Media<'images', true>;
+    infoBoxes: Schema.Attribute.Component<'shop.product-info-box', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    ingredients: Schema.Attribute.Text &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::product.product'
     >;
+    madeIn: Schema.Attribute.String;
     name: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.SetPluginOptions<{
@@ -595,6 +615,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         number
       >;
     publishedAt: Schema.Attribute.DateTime;
+    relatedProducts: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::product.product'
+    >;
     seoDescription: Schema.Attribute.Text &
       Schema.Attribute.SetPluginOptions<{
         i18n: {

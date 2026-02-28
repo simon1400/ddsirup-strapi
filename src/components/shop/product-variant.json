@@ -11,6 +11,9 @@
       "type": "string",
       "required": true
     },
+    "volume": {
+      "type": "string"
+    },
     "sku": {
       "type": "string"
     },
@@ -20,9 +23,6 @@
     "stock": {
       "type": "integer",
       "default": 0
-    },
-    "attributes": {
-      "type": "json"
     }
   }
 }
