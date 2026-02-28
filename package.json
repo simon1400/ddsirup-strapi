@@ -15,6 +15,8 @@
     "upgrade:dry": "npx @strapi/upgrade latest --dry"
   },
   "dependencies": {
+    "@_sh/strapi-plugin-ckeditor": "^7.0.0",
+    "@strapi-community/plugin-seo": "^2.1.1",
     "@strapi/plugin-cloud": "5.37.1",
     "@strapi/plugin-users-permissions": "5.37.1",
     "@strapi/strapi": "5.37.1",
@@ -22,6 +24,10 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
+    "strapi-import-export": "^0.0.1",
+    "strapi-plugin-required-relation-field": "^0.3.1",
+    "strapi-plugin-sortable-entries": "^1.2.1",
+    "strapi-provider-upload-imagekit": "^5.11.11",
     "styled-components": "^6.0.0"
   },
   "devDependencies": {

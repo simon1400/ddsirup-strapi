@@ -1,0 +1,82 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order",
+    "description": "Customer order"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "attributes": {
+    "orderNumber": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "paid", "cancelled", "refunded", "processing", "shipped", "delivered"],
+      "default": "pending",
+      "required": true
+    },
+    "items": {
+      "type": "json",
+      "required": true
+    },
+    "subtotal": {
+      "type": "decimal",
+      "required": true
+    },
+    "shippingCost": {
+      "type": "decimal",
+      "default": 0
+    },
+    "total": {
+      "type": "decimal",
+      "required": true
+    },
+    "currency": {
+      "type": "string",
+      "default": "CZK",
+      "required": true
+    },
+    "customerEmail": {
+      "type": "email",
+      "required": true
+    },
+    "customerFirstName": {
+      "type": "string",
+      "required": true
+    },
+    "customerLastName": {
+      "type": "string",
+      "required": true
+    },
+    "customerPhone": {
+      "type": "string"
+    },
+    "shippingAddress": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shop.address"
+    },
+    "billingAddress": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shop.address"
+    },
+    "comgateTransId": {
+      "type": "string",
+      "unique": true
+    },
+    "comgateStatus": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "text"
+    }
+  }
+}

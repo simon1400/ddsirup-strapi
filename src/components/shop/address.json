@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_shop_addresses",
+  "info": {
+    "displayName": "Address",
+    "icon": "map-marker",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "street": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "zip": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "default": "CZ",
+      "required": true
+    },
+    "company": {
+      "type": "string"
+    },
+    "ico": {
+      "type": "string"
+    },
+    "dic": {
+      "type": "string"
+    }
+  }
+}
