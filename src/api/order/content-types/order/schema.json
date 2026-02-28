@@ -77,6 +77,13 @@
     },
     "notes": {
       "type": "text"
+    },
+    "couponCode": {
+      "type": "string"
+    },
+    "discountAmount": {
+      "type": "decimal",
+      "default": 0
     }
   }
 }
