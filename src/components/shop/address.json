@@ -24,6 +24,9 @@
       "default": "CZ",
       "required": true
     },
+    "streetLine2": {
+      "type": "string"
+    },
     "company": {
       "type": "string"
     },

@@ -84,6 +84,17 @@
     "discountAmount": {
       "type": "decimal",
       "default": 0
+    },
+    "paymentMethod": {
+      "type": "string"
+    },
+    "customerForChildren": {
+      "type": "boolean",
+      "default": false
+    },
+    "customerForBar": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
