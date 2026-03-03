@@ -254,7 +254,6 @@ export interface ShopProductVariant extends Struct.ComponentSchema {
   attributes: {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Decimal;
-    sku: Schema.Attribute.String;
     stock: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     volume: Schema.Attribute.String;
   };

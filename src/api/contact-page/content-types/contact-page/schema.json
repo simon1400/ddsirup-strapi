@@ -1,0 +1,49 @@
+{
+  "kind": "singleType",
+  "collectionName": "contact_pages",
+  "info": {
+    "singularName": "contact-page",
+    "pluralName": "contact-pages",
+    "displayName": "Contact Page",
+    "description": "Contact page content"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "subtitle": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml",
+        "output": "HTML"
+      }
+    },
+    "phoneResponseInfo": {
+      "type": "string"
+    },
+    "emailResponseInfo": {
+      "type": "string"
+    },
+    "directorTitle": {
+      "type": "string"
+    },
+    "directorName": {
+      "type": "string"
+    },
+    "formTitle": {
+      "type": "string"
+    },
+    "formDescription": {
+      "type": "string"
+    }
+  }
+}

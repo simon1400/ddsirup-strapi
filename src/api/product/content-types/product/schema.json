@@ -30,26 +30,10 @@
       "targetField": "name",
       "required": true
     },
-    "shortDescription": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "price": {
       "type": "decimal",
       "required": true,
       "min": 0
-    },
-    "compareAtPrice": {
-      "type": "decimal",
-      "min": 0
-    },
-    "sku": {
-      "type": "string",
-      "unique": true
     },
     "stock": {
       "type": "integer",
@@ -59,14 +43,6 @@
     "images": {
       "type": "media",
       "multiple": true,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
-    "thumbnail": {
-      "type": "media",
-      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images"
@@ -82,14 +58,6 @@
       "type": "component",
       "component": "shop.product-variant",
       "repeatable": true
-    },
-    "featured": {
-      "type": "boolean",
-      "default": false
-    },
-    "weight": {
-      "type": "decimal",
-      "min": 0
     },
     "seoTitle": {
       "type": "string",
@@ -121,13 +89,13 @@
     },
     "infoBoxes": {
       "type": "component",
-      "component": "shop.product-info-box",
-      "repeatable": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
         }
-      }
+      },
+      "component": "shop.product-info-box",
+      "repeatable": true
     },
     "ingredients": {
       "type": "text",

@@ -1,0 +1,4 @@
+import { factories } from '@strapi/strapi';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default factories.createCoreService('api::contact-page.contact-page' as any);

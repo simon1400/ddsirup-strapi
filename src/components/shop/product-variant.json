@@ -14,9 +14,6 @@
     "volume": {
       "type": "string"
     },
-    "sku": {
-      "type": "string"
-    },
     "price": {
       "type": "decimal"
     },
