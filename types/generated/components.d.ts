@@ -22,6 +22,33 @@ export interface ElementsFeatureBlock extends Struct.ComponentSchema {
   };
 }
 
+export interface LayoutFooterLink extends Struct.ComponentSchema {
+  collectionName: 'components_layout_footer_links';
+  info: {
+    displayName: 'Footer Link';
+    pluralName: 'footer-links';
+    singularName: 'footer-link';
+  };
+  attributes: {
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+    openInNewTab: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    url: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
+export interface LayoutFooterNavGroup extends Struct.ComponentSchema {
+  collectionName: 'components_layout_footer_nav_groups';
+  info: {
+    displayName: 'Footer Nav Group';
+    pluralName: 'footer-nav-groups';
+    singularName: 'footer-nav-group';
+  };
+  attributes: {
+    links: Schema.Attribute.Component<'layout.footer-link', true>;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface LayoutNavItem extends Struct.ComponentSchema {
   collectionName: 'components_layout_nav_items';
   info: {
@@ -237,6 +264,8 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'elements.feature-block': ElementsFeatureBlock;
+      'layout.footer-link': LayoutFooterLink;
+      'layout.footer-nav-group': LayoutFooterNavGroup;
       'layout.nav-item': LayoutNavItem;
       'sections.categories-section': SectionsCategoriesSection;
       'sections.contact-form': SectionsContactForm;

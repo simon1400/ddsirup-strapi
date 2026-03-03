@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_layout_footer_nav_groups",
+  "info": {
+    "singularName": "footer-nav-group",
+    "pluralName": "footer-nav-groups",
+    "displayName": "Footer Nav Group"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "links": {
+      "type": "component",
+      "repeatable": true,
+      "component": "layout.footer-link"
+    }
+  }
+}

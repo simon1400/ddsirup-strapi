@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "global_info",
+  "info": {
+    "singularName": "global-info",
+    "pluralName": "global-infos",
+    "displayName": "Global Info",
+    "description": "Global company information (footer, etc.)"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "companyName": {
+      "type": "string",
+      "required": true
+    },
+    "ico": {
+      "type": "string"
+    },
+    "dic": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "phoneHours": {
+      "type": "string"
+    },
+    "street": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "copyright": {
+      "type": "string"
+    }
+  }
+}

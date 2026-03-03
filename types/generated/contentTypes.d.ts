@@ -556,6 +556,43 @@ export interface ApiCouponCoupon extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
+  collectionName: 'global_info';
+  info: {
+    description: 'Global company information (footer, etc.)';
+    displayName: 'Global Info';
+    pluralName: 'global-infos';
+    singularName: 'global-info';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    city: Schema.Attribute.String;
+    companyName: Schema.Attribute.String & Schema.Attribute.Required;
+    copyright: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    dic: Schema.Attribute.String;
+    email: Schema.Attribute.Email;
+    ico: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::global-info.global-info'
+    > &
+      Schema.Attribute.Private;
+    phone: Schema.Attribute.String;
+    phoneHours: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    street: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   collectionName: 'homepages';
   info: {
@@ -615,6 +652,10 @@ export interface ApiNavigationNavigation extends Struct.SingleTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    footerNavGroups: Schema.Attribute.Component<
+      'layout.footer-nav-group',
+      true
+    >;
     items: Schema.Attribute.Component<'layout.nav-item', true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -1331,6 +1372,7 @@ declare module '@strapi/strapi' {
       'api::category.category': ApiCategoryCategory;
       'api::contact.contact': ApiContactContact;
       'api::coupon.coupon': ApiCouponCoupon;
+      'api::global-info.global-info': ApiGlobalInfoGlobalInfo;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::navigation.navigation': ApiNavigationNavigation;
       'api::order.order': ApiOrderOrder;
