@@ -232,6 +232,32 @@ export interface ShopAddress extends Struct.ComponentSchema {
   };
 }
 
+export interface ShopOrderItem extends Struct.ComponentSchema {
+  collectionName: 'components_shop_order_items';
+  info: {
+    description: 'Single item in a customer order';
+    displayName: 'Order Item';
+    icon: 'shoppingCart';
+  };
+  attributes: {
+    productName: Schema.Attribute.String & Schema.Attribute.Required;
+    productSlug: Schema.Attribute.String;
+    quantity: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.SetMinMax<
+        {
+          min: 1;
+        },
+        number
+      >;
+    thumbnail: Schema.Attribute.String;
+    totalPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    unitPrice: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    variantName: Schema.Attribute.String;
+    variantVolume: Schema.Attribute.String;
+  };
+}
+
 export interface ShopProductInfoBox extends Struct.ComponentSchema {
   collectionName: 'components_shop_product_info_boxes';
   info: {
@@ -239,6 +265,8 @@ export interface ShopProductInfoBox extends Struct.ComponentSchema {
     icon: 'information';
   };
   attributes: {
+    color: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     content: Schema.Attribute.Text & Schema.Attribute.Required;
     title: Schema.Attribute.String & Schema.Attribute.Required;
   };
@@ -275,6 +303,7 @@ declare module '@strapi/strapi' {
       'shared.open-graph': SharedOpenGraph;
       'shared.seo': SharedSeo;
       'shop.address': ShopAddress;
+      'shop.order-item': ShopOrderItem;
       'shop.product-info-box': ShopProductInfoBox;
       'shop.product-variant': ShopProductVariant;
     }

@@ -16,14 +16,16 @@
       "unique": true,
       "required": true
     },
-    "status": {
+    "orderStatus": {
       "type": "enumeration",
       "enum": ["pending", "paid", "cancelled", "refunded", "processing", "shipped", "delivered"],
       "default": "pending",
       "required": true
     },
     "items": {
-      "type": "json",
+      "type": "component",
+      "repeatable": true,
+      "component": "shop.order-item",
       "required": true
     },
     "subtotal": {
@@ -95,6 +97,15 @@
     "customerForBar": {
       "type": "boolean",
       "default": false
+    },
+    "invoiceNumber": {
+      "type": "string",
+      "unique": true
+    },
+    "invoicePdf": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": ["files"]
     }
   }
 }

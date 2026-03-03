@@ -621,6 +621,9 @@ export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
     dic: Schema.Attribute.String;
     email: Schema.Attribute.Email;
     ico: Schema.Attribute.String;
+    invoiceNextNumber: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
+    invoicePrefix: Schema.Attribute.String & Schema.Attribute.DefaultTo<''>;
+    invoiceYear: Schema.Attribute.Integer;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -634,6 +637,7 @@ export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    vatRate: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<12>;
   };
 }
 
@@ -745,7 +749,10 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     customerLastName: Schema.Attribute.String & Schema.Attribute.Required;
     customerPhone: Schema.Attribute.String;
     discountAmount: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
-    items: Schema.Attribute.JSON & Schema.Attribute.Required;
+    invoiceNumber: Schema.Attribute.String & Schema.Attribute.Unique;
+    invoicePdf: Schema.Attribute.Media<'files'>;
+    items: Schema.Attribute.Component<'shop.order-item', true> &
+      Schema.Attribute.Required;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
@@ -753,11 +760,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     orderNumber: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
-    paymentMethod: Schema.Attribute.String;
-    publishedAt: Schema.Attribute.DateTime;
-    shippingAddress: Schema.Attribute.Component<'shop.address', false>;
-    shippingCost: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
-    status: Schema.Attribute.Enumeration<
+    orderStatus: Schema.Attribute.Enumeration<
       [
         'pending',
         'paid',
@@ -770,6 +773,10 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Required &
       Schema.Attribute.DefaultTo<'pending'>;
+    paymentMethod: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    shippingAddress: Schema.Attribute.Component<'shop.address', false>;
+    shippingCost: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     subtotal: Schema.Attribute.Decimal & Schema.Attribute.Required;
     total: Schema.Attribute.Decimal & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;

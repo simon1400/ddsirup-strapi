@@ -39,6 +39,21 @@
     },
     "copyright": {
       "type": "string"
+    },
+    "invoicePrefix": {
+      "type": "string",
+      "default": ""
+    },
+    "invoiceNextNumber": {
+      "type": "integer",
+      "default": 1
+    },
+    "invoiceYear": {
+      "type": "integer"
+    },
+    "vatRate": {
+      "type": "decimal",
+      "default": 12
     }
   }
 }
