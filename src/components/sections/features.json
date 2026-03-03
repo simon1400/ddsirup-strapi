@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_sections_features",
+  "info": {
+    "displayName": "Features",
+    "icon": "star"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "blocks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.feature-block"
+    }
+  }
+}

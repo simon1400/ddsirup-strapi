@@ -1,0 +1,18 @@
+{
+  "collectionName": "components_sections_products_sliders",
+  "info": {
+    "displayName": "Products Slider",
+    "icon": "grid"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    }
+  }
+}

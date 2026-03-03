@@ -1,0 +1,44 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage",
+    "description": "Homepage page content with dynamic sections"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroTitle": {
+      "type": "string",
+      "required": true
+    },
+    "heroSubtitle": {
+      "type": "string"
+    },
+    "heroVideo": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["videos"]
+    },
+    "heroCategories": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::category.category"
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "sections.categories-section",
+        "sections.text-section",
+        "sections.products-slider",
+        "sections.features",
+        "sections.contact-form"
+      ]
+    }
+  }
+}
