@@ -59,22 +59,6 @@
       "component": "shop.product-variant",
       "repeatable": true
     },
-    "seoTitle": {
-      "type": "string",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
-    "seoDescription": {
-      "type": "text",
-      "pluginOptions": {
-        "i18n": {
-          "localized": true
-        }
-      }
-    },
     "description": {
       "type": "customField",
       "pluginOptions": {
@@ -115,6 +99,16 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::product.product"
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.seo"
     }
   }
 }
