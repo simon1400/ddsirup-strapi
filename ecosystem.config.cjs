@@ -5,6 +5,7 @@ module.exports = {
       script: "npm",
       args: "start",
       cwd: "/opt/ddsirup/strapi",
+      node_args: "--max-old-space-size=4096",
       env: {
         NODE_ENV: "production",
         PORT: 1340,

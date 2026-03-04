@@ -54,6 +54,19 @@
     "vatRate": {
       "type": "decimal",
       "default": 12
+    },
+    "gtmId": {
+      "type": "string"
+    },
+    "comgateTestMode": {
+      "type": "boolean",
+      "default": true
+    },
+    "orderFromEmail": {
+      "type": "string"
+    },
+    "contactFromEmail": {
+      "type": "string"
     }
   }
 }

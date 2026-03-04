@@ -620,13 +620,17 @@ export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
   };
   attributes: {
     city: Schema.Attribute.String;
+    comgateTestMode: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
     companyName: Schema.Attribute.String & Schema.Attribute.Required;
+    contactFromEmail: Schema.Attribute.String;
     copyright: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     dic: Schema.Attribute.String;
     email: Schema.Attribute.Email;
+    gtmId: Schema.Attribute.String;
     ico: Schema.Attribute.String;
     invoiceNextNumber: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     invoicePrefix: Schema.Attribute.String & Schema.Attribute.DefaultTo<''>;
@@ -637,6 +641,7 @@ export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
       'api::global-info.global-info'
     > &
       Schema.Attribute.Private;
+    orderFromEmail: Schema.Attribute.String;
     phone: Schema.Attribute.String;
     phoneHours: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
