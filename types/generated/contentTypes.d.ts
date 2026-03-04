@@ -808,6 +808,9 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
       Schema.Attribute.Private;
+    messengerShipmentId: Schema.Attribute.String;
+    messengerTrackingCode: Schema.Attribute.String;
+    messengerTrackingUrl: Schema.Attribute.String;
     notes: Schema.Attribute.Text;
     orderNumber: Schema.Attribute.String &
       Schema.Attribute.Required &
@@ -831,6 +834,7 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
     shippingCost: Schema.Attribute.Decimal & Schema.Attribute.DefaultTo<0>;
     subtotal: Schema.Attribute.Decimal & Schema.Attribute.Required;
     total: Schema.Attribute.Decimal & Schema.Attribute.Required;
+    totalWeight: Schema.Attribute.Decimal;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

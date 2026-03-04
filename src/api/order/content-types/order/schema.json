@@ -106,6 +106,18 @@
       "type": "media",
       "multiple": false,
       "allowedTypes": ["files"]
+    },
+    "totalWeight": {
+      "type": "decimal"
+    },
+    "messengerShipmentId": {
+      "type": "string"
+    },
+    "messengerTrackingCode": {
+      "type": "string"
+    },
+    "messengerTrackingUrl": {
+      "type": "string"
     }
   }
 }
