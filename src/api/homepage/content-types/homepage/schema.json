@@ -25,6 +25,12 @@
       "required": false,
       "allowedTypes": ["videos"]
     },
+    "heroPosterImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
     "heroCategories": {
       "type": "relation",
       "relation": "oneToMany",
