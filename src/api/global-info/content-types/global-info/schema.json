@@ -62,6 +62,10 @@
       "type": "boolean",
       "default": true
     },
+    "messengerTestMode": {
+      "type": "boolean",
+      "default": true
+    },
     "orderFromEmail": {
       "type": "string"
     },
