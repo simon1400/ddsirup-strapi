@@ -35,6 +35,9 @@
     },
     "variantVolume": {
       "type": "string"
+    },
+    "productCategorySlug": {
+      "type": "string"
     }
   }
 }
