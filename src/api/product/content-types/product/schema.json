@@ -35,11 +35,6 @@
       "required": true,
       "min": 0
     },
-    "stock": {
-      "type": "integer",
-      "default": 0,
-      "min": 0
-    },
     "images": {
       "type": "media",
       "multiple": true,
