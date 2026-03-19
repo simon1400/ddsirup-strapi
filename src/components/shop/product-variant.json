@@ -16,6 +16,10 @@
     },
     "price": {
       "type": "decimal"
+    },
+    "inStock": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

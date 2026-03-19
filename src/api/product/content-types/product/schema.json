@@ -95,10 +95,6 @@
       "relation": "manyToMany",
       "target": "api::product.product"
     },
-    "inStock": {
-      "type": "boolean",
-      "default": true
-    },
     "seo": {
       "type": "component",
       "repeatable": false,
