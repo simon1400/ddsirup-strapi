@@ -36,6 +36,12 @@
       "relation": "oneToMany",
       "target": "api::category.category"
     },
+    "heroCustomButtonText": {
+      "type": "string"
+    },
+    "heroCustomButtonUrl": {
+      "type": "string"
+    },
     "sections": {
       "type": "dynamiczone",
       "components": [

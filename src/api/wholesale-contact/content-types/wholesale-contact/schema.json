@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wholesale_contacts",
+  "info": {
+    "singularName": "wholesale-contact",
+    "pluralName": "wholesale-contacts",
+    "displayName": "Wholesale Contact",
+    "description": "Wholesale / gastro contact form submissions"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "companyName": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "message": {
+      "type": "text",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["new", "read", "replied"],
+      "default": "new"
+    }
+  }
+}

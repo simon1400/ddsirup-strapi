@@ -240,6 +240,7 @@ export interface ShopOrderItem extends Struct.ComponentSchema {
     icon: 'shoppingCart';
   };
   attributes: {
+    productCategorySlug: Schema.Attribute.String;
     productName: Schema.Attribute.String & Schema.Attribute.Required;
     productSlug: Schema.Attribute.String;
     quantity: Schema.Attribute.Integer &
@@ -282,7 +283,6 @@ export interface ShopProductVariant extends Struct.ComponentSchema {
   attributes: {
     name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Decimal;
-    stock: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
     volume: Schema.Attribute.String;
   };
 }

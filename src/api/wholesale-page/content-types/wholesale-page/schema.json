@@ -1,0 +1,41 @@
+{
+  "kind": "singleType",
+  "collectionName": "wholesale_pages",
+  "info": {
+    "singularName": "wholesale-page",
+    "pluralName": "wholesale-pages",
+    "displayName": "Wholesale Page",
+    "description": "Velkoobchod / Pro podniky page content"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml",
+        "output": "HTML"
+      }
+    },
+    "specialistContent": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml",
+        "output": "HTML"
+      }
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.seo"
+    }
+  }
+}

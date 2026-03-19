@@ -452,7 +452,14 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text &
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'defaultHtml';
+        }
+      > &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;
@@ -641,6 +648,8 @@ export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
       'api::global-info.global-info'
     > &
       Schema.Attribute.Private;
+    messengerTestMode: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<true>;
     orderFromEmail: Schema.Attribute.String;
     phone: Schema.Attribute.String;
     phoneHours: Schema.Attribute.String;
@@ -672,6 +681,9 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
       'oneToMany',
       'api::category.category'
     >;
+    heroCustomButtonText: Schema.Attribute.String;
+    heroCustomButtonUrl: Schema.Attribute.String;
+    heroPosterImage: Schema.Attribute.Media<'images'>;
     heroSubtitle: Schema.Attribute.String;
     heroTitle: Schema.Attribute.String & Schema.Attribute.Required;
     heroVideo: Schema.Attribute.Media<'videos'>;
@@ -888,6 +900,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    inStock: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -921,18 +934,91 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
         };
       }>;
     slug: Schema.Attribute.UID<'name'> & Schema.Attribute.Required;
-    stock: Schema.Attribute.Integer &
-      Schema.Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      > &
-      Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     variants: Schema.Attribute.Component<'shop.product-variant', true>;
+  };
+}
+
+export interface ApiWholesaleContactWholesaleContact
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'wholesale_contacts';
+  info: {
+    description: 'Wholesale / gastro contact form submissions';
+    displayName: 'Wholesale Contact';
+    pluralName: 'wholesale-contacts';
+    singularName: 'wholesale-contact';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    city: Schema.Attribute.String & Schema.Attribute.Required;
+    companyName: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::wholesale-contact.wholesale-contact'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Text & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<['new', 'read', 'replied']> &
+      Schema.Attribute.DefaultTo<'new'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWholesalePageWholesalePage extends Struct.SingleTypeSchema {
+  collectionName: 'wholesale_pages';
+  info: {
+    description: 'Velkoobchod / Pro podniky page content';
+    displayName: 'Wholesale Page';
+    pluralName: 'wholesale-pages';
+    singularName: 'wholesale-page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'defaultHtml';
+        }
+      >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::wholesale-page.wholesale-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    specialistContent: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'defaultHtml';
+        }
+      >;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -1457,6 +1543,8 @@ declare module '@strapi/strapi' {
       'api::navigation.navigation': ApiNavigationNavigation;
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
+      'api::wholesale-contact.wholesale-contact': ApiWholesaleContactWholesaleContact;
+      'api::wholesale-page.wholesale-page': ApiWholesalePageWholesalePage;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
