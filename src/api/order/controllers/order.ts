@@ -40,28 +40,48 @@ export default factories.createCoreController('api::order.order', ({ strapi }) =
     }
 
     const prefix = (globalInfo.invoicePrefix as string) ?? '';
-    const paddedNum = String(nextNum).padStart(5, '0');
-    const invoiceNumber = prefix
-      ? `${prefix}${paddedNum}`
-      : `${currentYear}${paddedNum}`;
 
-    // Increment counter in global info
-    await strapi.documents('api::global-info.global-info').update({
-      documentId: globalInfo.documentId as string,
-      data: {
-        invoiceNextNumber: nextNum + 1,
-        invoiceYear: currentYear,
-      } as any,
-    });
+    // Retry loop to handle unique constraint conflicts (race condition)
+    const MAX_RETRIES = 5;
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+      const paddedNum = String(nextNum).padStart(5, '0');
+      const invoiceNumber = prefix
+        ? `${prefix}${paddedNum}`
+        : `${currentYear}${paddedNum}`;
 
-    // Save invoice number to order
-    await strapi.documents('api::order.order').update({
-      documentId,
-      data: {
-        invoiceNumber,
-      } as any,
-    });
+      try {
+        // Save invoice number to order
+        await strapi.documents('api::order.order').update({
+          documentId,
+          data: {
+            invoiceNumber,
+          } as any,
+        });
 
-    return ctx.send({ invoiceNumber });
+        // Increment counter in global info (only after successful order update)
+        await strapi.documents('api::global-info.global-info').update({
+          documentId: globalInfo.documentId as string,
+          data: {
+            invoiceNextNumber: nextNum + 1,
+            invoiceYear: currentYear,
+          } as any,
+        });
+
+        return ctx.send({ invoiceNumber });
+      } catch (err: any) {
+        const isUniqueError =
+          err?.message?.includes('unique') ||
+          err?.details?.errors?.some((e: any) => e.message?.includes('unique'));
+
+        if (isUniqueError && attempt < MAX_RETRIES - 1) {
+          // Invoice number already taken, try next number
+          nextNum++;
+          continue;
+        }
+        throw err;
+      }
+    }
+
+    return ctx.internalServerError('Failed to assign invoice number after retries');
   },
 }));
