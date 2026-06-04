@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@_sh/strapi-plugin-ckeditor": "^7.0.0",
+    "@ckeditor/strapi-plugin-ckeditor": "^1.1.2",
     "@strapi-community/plugin-seo": "^2.1.1",
     "@strapi/plugin-cloud": "5.37.1",
     "@strapi/plugin-color-picker": "^5.37.1",

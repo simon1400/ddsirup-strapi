@@ -14,9 +14,6 @@
     "recipeName": {
       "type": "string"
     },
-    "recipe": {
-      "type": "text"
-    },
     "badge": {
       "type": "relation",
       "relation": "oneToOne",
@@ -29,17 +26,20 @@
       "mappedBy": "recipes"
     },
     "recipeType": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "recipeBg": {
       "type": "customField",
       "customField": "plugin::color-picker.color",
       "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
     },
-    "badgeColor": {
+    "recipe": {
       "type": "customField",
-      "customField": "plugin::color-picker.color",
-      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      }
     }
   }
 }
