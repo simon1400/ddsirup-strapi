@@ -281,6 +281,7 @@ export interface ShopProductVariant extends Struct.ComponentSchema {
     icon: 'layer';
   };
   attributes: {
+    inStock: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Decimal;
     volume: Schema.Attribute.String;
