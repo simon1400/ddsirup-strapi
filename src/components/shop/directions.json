@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_shop_directions",
+  "info": {
+    "displayName": "directions"
+  },
+  "options": {},
+  "attributes": {
+    "beverageName": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "Limonáda",
+        "Koktejl",
+        "Jogurt"
+      ]
+    },
+    "amount": {
+      "type": "string",
+      "required": true
+    },
+    "addIn": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

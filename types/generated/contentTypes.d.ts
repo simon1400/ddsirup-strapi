@@ -641,44 +641,6 @@ export interface ApiCouponCoupon extends Struct.CollectionTypeSchema {
   };
 }
 
-export interface ApiDirectionDirection extends Struct.CollectionTypeSchema {
-  collectionName: 'directions';
-  info: {
-    displayName: 'Direction';
-    pluralName: 'directions';
-    singularName: 'direction';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    addIn: Schema.Attribute.String;
-    amount: Schema.Attribute.RichText &
-      Schema.Attribute.Required &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          preset: 'defaultHtml';
-        }
-      >;
-    beverageName: Schema.Attribute.String & Schema.Attribute.Required;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::direction.direction'
-    > &
-      Schema.Attribute.Private;
-    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-  };
-}
-
 export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
   collectionName: 'global_info';
   info: {
@@ -952,10 +914,18 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
-    directions: Schema.Attribute.Relation<
-      'manyToMany',
-      'api::direction.direction'
-    >;
+    directions: Schema.Attribute.Component<'shop.directions', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 3;
+        },
+        number
+      >;
     images: Schema.Attribute.Media<'images', true>;
     infoBoxes: Schema.Attribute.Component<'shop.product-info-box', true> &
       Schema.Attribute.SetPluginOptions<{
@@ -1646,7 +1616,6 @@ declare module '@strapi/strapi' {
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::contact.contact': ApiContactContact;
       'api::coupon.coupon': ApiCouponCoupon;
-      'api::direction.direction': ApiDirectionDirection;
       'api::global-info.global-info': ApiGlobalInfoGlobalInfo;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::info-page.info-page': ApiInfoPageInfoPage;

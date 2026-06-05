@@ -90,6 +90,17 @@
       "target": "api::recipe.recipe",
       "inversedBy": "products"
     },
+    "directions": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shop.directions",
+      "repeatable": true,
+      "max": 3
+    },
     "countryOfOrigin": {
       "type": "string"
     },
@@ -110,12 +121,6 @@
       },
       "component": "shared.seo",
       "repeatable": false
-    },
-    "directions": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::direction.direction",
-      "mappedBy": "products"
     }
   }
 }
