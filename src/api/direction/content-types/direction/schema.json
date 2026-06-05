@@ -26,20 +26,11 @@
     "addIn": {
       "type": "string"
     },
-    "boxcolor": {
-      "type": "customField",
-      "customField": "plugin::color-picker.color",
-      "regex": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$"
-    },
-    "img": {
-      "type": "media",
-      "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "inversedBy": "directions"
     }
   }
 }

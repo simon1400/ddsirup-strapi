@@ -662,18 +662,16 @@ export interface ApiDirectionDirection extends Struct.CollectionTypeSchema {
         }
       >;
     beverageName: Schema.Attribute.String & Schema.Attribute.Required;
-    boxcolor: Schema.Attribute.String &
-      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::direction.direction'
     > &
       Schema.Attribute.Private;
+    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -954,6 +952,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
           localized: true;
         };
       }>;
+    directions: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::direction.direction'
+    >;
     images: Schema.Attribute.Media<'images', true>;
     infoBoxes: Schema.Attribute.Component<'shop.product-info-box', true> &
       Schema.Attribute.SetPluginOptions<{
@@ -1032,14 +1034,15 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
     products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
     recipe: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
       Schema.Attribute.CustomField<
         'plugin::ckeditor5.CKEditor',
         {
           preset: 'defaultHtml';
         }
       >;
-    recipeName: Schema.Attribute.String;
-    recipeType: Schema.Attribute.String & Schema.Attribute.Required;
+    recipeName: Schema.Attribute.String & Schema.Attribute.Required;
+    recipeType: Schema.Attribute.Enumeration<['Alko', 'Nealko']>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

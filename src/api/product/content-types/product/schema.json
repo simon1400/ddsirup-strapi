@@ -110,6 +110,12 @@
       },
       "component": "shared.seo",
       "repeatable": false
+    },
+    "directions": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::direction.direction",
+      "mappedBy": "products"
     }
   }
 }

@@ -12,7 +12,8 @@
   "pluginOptions": {},
   "attributes": {
     "recipeName": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "badge": {
       "type": "relation",
@@ -25,16 +26,20 @@
       "target": "api::product.product",
       "mappedBy": "recipes"
     },
-    "recipeType": {
-      "type": "string",
-      "required": true
-    },
     "recipe": {
       "type": "customField",
       "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml"
-      }
+      },
+      "required": true
+    },
+    "recipeType": {
+      "type": "enumeration",
+      "enum": [
+        "Alko",
+        "Nealko"
+      ]
     }
   }
 }
