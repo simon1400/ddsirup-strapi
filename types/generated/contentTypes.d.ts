@@ -641,6 +641,46 @@ export interface ApiCouponCoupon extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiDirectionDirection extends Struct.CollectionTypeSchema {
+  collectionName: 'directions';
+  info: {
+    displayName: 'Direction';
+    pluralName: 'directions';
+    singularName: 'direction';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    addIn: Schema.Attribute.String;
+    amount: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    beverageName: Schema.Attribute.String & Schema.Attribute.Required;
+    boxcolor: Schema.Attribute.String &
+      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::direction.direction'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
   collectionName: 'global_info';
   info: {
@@ -998,8 +1038,6 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
           preset: 'defaultHtml';
         }
       >;
-    recipeBg: Schema.Attribute.String &
-      Schema.Attribute.CustomField<'plugin::color-picker.color'>;
     recipeName: Schema.Attribute.String;
     recipeType: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
@@ -1605,6 +1643,7 @@ declare module '@strapi/strapi' {
       'api::contact-page.contact-page': ApiContactPageContactPage;
       'api::contact.contact': ApiContactContact;
       'api::coupon.coupon': ApiCouponCoupon;
+      'api::direction.direction': ApiDirectionDirection;
       'api::global-info.global-info': ApiGlobalInfoGlobalInfo;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::info-page.info-page': ApiInfoPageInfoPage;
