@@ -232,6 +232,20 @@ export interface ShopAddress extends Struct.ComponentSchema {
   };
 }
 
+export interface ShopCalculation extends Struct.ComponentSchema {
+  collectionName: 'components_shop_calculations';
+  info: {
+    displayName: 'calculation';
+  };
+  attributes: {
+    amount: Schema.Attribute.Integer & Schema.Attribute.Required;
+    beverageName: Schema.Attribute.Enumeration<
+      ['limon\u00E1da', 'koktejl', 'jogurt']
+    > &
+      Schema.Attribute.Required;
+  };
+}
+
 export interface ShopDirections extends Struct.ComponentSchema {
   collectionName: 'components_shop_directions';
   info: {
@@ -319,6 +333,7 @@ declare module '@strapi/strapi' {
       'shared.open-graph': SharedOpenGraph;
       'shared.seo': SharedSeo;
       'shop.address': ShopAddress;
+      'shop.calculation': ShopCalculation;
       'shop.directions': ShopDirections;
       'shop.order-item': ShopOrderItem;
       'shop.product-info-box': ShopProductInfoBox;

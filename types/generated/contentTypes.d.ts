@@ -720,7 +720,9 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
       'api::homepage.homepage'
     > &
       Schema.Attribute.Private;
+    partnersNumber: Schema.Attribute.Integer;
     publishedAt: Schema.Attribute.DateTime;
+    reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     sections: Schema.Attribute.DynamicZone<
       [
         'sections.categories-section',
@@ -897,6 +899,18 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    calculation: Schema.Attribute.Component<'shop.calculation', true> &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Schema.Attribute.SetMinMax<
+        {
+          max: 3;
+        },
+        number
+      >;
     category: Schema.Attribute.Relation<'manyToOne', 'api::category.category'>;
     countryOfOrigin: Schema.Attribute.String;
     createdAt: Schema.Attribute.DateTime;
@@ -966,6 +980,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
       'manyToMany',
       'api::product.product'
     >;
+    reviews: Schema.Attribute.Relation<'manyToMany', 'api::review.review'>;
     seo: Schema.Attribute.Component<'shared.seo', false> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -1013,6 +1028,43 @@ export interface ApiRecipeRecipe extends Struct.CollectionTypeSchema {
       >;
     recipeName: Schema.Attribute.String & Schema.Attribute.Required;
     recipeType: Schema.Attribute.Enumeration<['Alko', 'Nealko']>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiReviewReview extends Struct.CollectionTypeSchema {
+  collectionName: 'reviews';
+  info: {
+    displayName: 'Review';
+    pluralName: 'reviews';
+    singularName: 'review';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::review.review'
+    > &
+      Schema.Attribute.Private;
+    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    review: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+    reviewAuthor: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1623,6 +1675,7 @@ declare module '@strapi/strapi' {
       'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'api::recipe.recipe': ApiRecipeRecipe;
+      'api::review.review': ApiReviewReview;
       'api::wholesale-contact.wholesale-contact': ApiWholesaleContactWholesaleContact;
       'api::wholesale-page.wholesale-page': ApiWholesalePageWholesalePage;
       'plugin::content-releases.release': PluginContentReleasesRelease;

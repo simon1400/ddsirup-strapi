@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shop_calculations",
+  "info": {
+    "displayName": "calculation"
+  },
+  "options": {},
+  "attributes": {
+    "amount": {
+      "type": "integer",
+      "required": true
+    },
+    "beverageName": {
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "limonáda",
+        "koktejl",
+        "jogurt"
+      ]
+    }
+  },
+  "config": {}
+}
