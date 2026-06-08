@@ -138,6 +138,16 @@
       "relation": "manyToMany",
       "target": "api::review.review",
       "inversedBy": "products"
+    },
+    "maintenance": {
+      "type": "component",
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shop.maintenance",
+      "repeatable": false
     }
   }
 }

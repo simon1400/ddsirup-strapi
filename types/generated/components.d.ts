@@ -261,6 +261,25 @@ export interface ShopDirections extends Struct.ComponentSchema {
   };
 }
 
+export interface ShopMaintenance extends Struct.ComponentSchema {
+  collectionName: 'components_shop_maintenances';
+  info: {
+    displayName: 'maintenance';
+  };
+  attributes: {
+    additionalInfo: Schema.Attribute.String &
+      Schema.Attribute.DefaultTo<'P\u0159irozen\u00FD kal je znakem skute\u010Dn\u00E9ho ovoce.'>;
+    maintenance: Schema.Attribute.RichText &
+      Schema.Attribute.Required &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          preset: 'defaultHtml';
+        }
+      >;
+  };
+}
+
 export interface ShopOrderItem extends Struct.ComponentSchema {
   collectionName: 'components_shop_order_items';
   info: {
@@ -335,6 +354,7 @@ declare module '@strapi/strapi' {
       'shop.address': ShopAddress;
       'shop.calculation': ShopCalculation;
       'shop.directions': ShopDirections;
+      'shop.maintenance': ShopMaintenance;
       'shop.order-item': ShopOrderItem;
       'shop.product-info-box': ShopProductInfoBox;
       'shop.product-variant': ShopProductVariant;

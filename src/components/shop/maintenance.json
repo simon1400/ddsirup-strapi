@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shop_maintenances",
+  "info": {
+    "displayName": "maintenance"
+  },
+  "options": {},
+  "attributes": {
+    "maintenance": {
+      "type": "customField",
+      "customField": "plugin::ckeditor5.CKEditor",
+      "options": {
+        "preset": "defaultHtml"
+      },
+      "required": true
+    },
+    "additionalInfo": {
+      "type": "string",
+      "default": "Přirozený kal je znakem skutečného ovoce."
+    }
+  },
+  "config": {}
+}
