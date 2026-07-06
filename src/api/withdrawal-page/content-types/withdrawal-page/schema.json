@@ -1,11 +1,11 @@
 {
   "kind": "singleType",
-  "collectionName": "wholesale_pages",
+  "collectionName": "withdrawal_pages",
   "info": {
-    "singularName": "wholesale-page",
-    "pluralName": "wholesale-pages",
-    "displayName": "Wholesale Page",
-    "description": "Velkoobchod / Pro podniky page content"
+    "singularName": "withdrawal-page",
+    "pluralName": "withdrawal-pages",
+    "displayName": "Withdrawal Page",
+    "description": "Odstoupení od smlouvy page content"
   },
   "options": {
     "draftAndPublish": false
@@ -27,13 +27,16 @@
         "output": "HTML"
       }
     },
-    "specialistContent": {
+    "warningText": {
       "type": "customField",
       "customField": "plugin::ckeditor5.CKEditor",
       "options": {
         "preset": "defaultHtml",
         "output": "HTML"
       }
+    },
+    "returnAddress": {
+      "type": "string"
     },
     "seo": {
       "type": "component",

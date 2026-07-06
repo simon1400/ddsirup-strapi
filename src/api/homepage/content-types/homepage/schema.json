@@ -49,11 +49,10 @@
     "sections": {
       "type": "dynamiczone",
       "components": [
-        "sections.categories-section",
-        "sections.text-section",
         "sections.products-slider",
         "sections.features",
-        "sections.contact-form"
+        "sections.contact-form",
+        "sections.bottle-usage"
       ]
     },
     "seo": {

@@ -22,6 +22,19 @@ export interface ElementsFeatureBlock extends Struct.ComponentSchema {
   };
 }
 
+export interface ElementsUsageItem extends Struct.ComponentSchema {
+  collectionName: 'components_elements_usage_items';
+  info: {
+    description: 'One "25\u00D7 limon\u00E1d" line of the bottle usage section';
+    displayName: 'Usage Item';
+    icon: 'bulletList';
+  };
+  attributes: {
+    count: Schema.Attribute.String & Schema.Attribute.Required;
+    label: Schema.Attribute.String & Schema.Attribute.Required;
+  };
+}
+
 export interface LayoutFooterLink extends Struct.ComponentSchema {
   collectionName: 'components_layout_footer_links';
   info: {
@@ -64,25 +77,16 @@ export interface LayoutNavItem extends Struct.ComponentSchema {
   };
 }
 
-export interface SectionsCategoriesSection extends Struct.ComponentSchema {
-  collectionName: 'components_sections_categories_sections';
+export interface SectionsBottleUsage extends Struct.ComponentSchema {
+  collectionName: 'components_sections_bottle_usages';
   info: {
-    displayName: 'Categories Section';
-    icon: 'apps';
+    description: '"Z jednoho litru sirupu" \u2014 bottle photo with radiating usage counts';
+    displayName: 'Bottle Usage';
+    icon: 'chartBubble';
   };
   attributes: {
-    categories: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::category.category'
-    >;
-    description: Schema.Attribute.RichText &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'defaultHtml';
-        }
-      >;
+    bottleImage: Schema.Attribute.Media<'images'>;
+    items: Schema.Attribute.Component<'elements.usage-item', true>;
     title: Schema.Attribute.String;
   };
 }
@@ -137,25 +141,6 @@ export interface SectionsProductsSlider extends Struct.ComponentSchema {
   };
   attributes: {
     products: Schema.Attribute.Relation<'oneToMany', 'api::product.product'>;
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface SectionsTextSection extends Struct.ComponentSchema {
-  collectionName: 'components_sections_text_sections';
-  info: {
-    displayName: 'Text Section';
-    icon: 'pencil';
-  };
-  attributes: {
-    content: Schema.Attribute.RichText &
-      Schema.Attribute.CustomField<
-        'plugin::ckeditor5.CKEditor',
-        {
-          output: 'HTML';
-          preset: 'defaultHtml';
-        }
-      >;
     title: Schema.Attribute.String;
   };
 }
@@ -340,15 +325,15 @@ declare module '@strapi/strapi' {
   export module Public {
     export interface ComponentSchemas {
       'elements.feature-block': ElementsFeatureBlock;
+      'elements.usage-item': ElementsUsageItem;
       'layout.footer-link': LayoutFooterLink;
       'layout.footer-nav-group': LayoutFooterNavGroup;
       'layout.nav-item': LayoutNavItem;
-      'sections.categories-section': SectionsCategoriesSection;
+      'sections.bottle-usage': SectionsBottleUsage;
       'sections.contact-form': SectionsContactForm;
       'sections.features': SectionsFeatures;
       'sections.hero': SectionsHero;
       'sections.products-slider': SectionsProductsSlider;
-      'sections.text-section': SectionsTextSection;
       'shared.open-graph': SharedOpenGraph;
       'shared.seo': SharedSeo;
       'shop.address': ShopAddress;

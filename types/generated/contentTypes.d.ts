@@ -450,7 +450,11 @@ export interface ApiBadgeBadge extends Struct.CollectionTypeSchema {
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::badge.badge'> &
       Schema.Attribute.Private;
+    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
     publishedAt: Schema.Attribute.DateTime;
+    sortPriority: Schema.Attribute.Integer &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<0>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -654,6 +658,7 @@ export interface ApiGlobalInfoGlobalInfo extends Struct.SingleTypeSchema {
   };
   attributes: {
     city: Schema.Attribute.String;
+    claimsEmail: Schema.Attribute.Email;
     comgateTestMode: Schema.Attribute.Boolean &
       Schema.Attribute.DefaultTo<true>;
     companyName: Schema.Attribute.String & Schema.Attribute.Required;
@@ -725,11 +730,10 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     reviews: Schema.Attribute.Relation<'oneToMany', 'api::review.review'>;
     sections: Schema.Attribute.DynamicZone<
       [
-        'sections.categories-section',
-        'sections.text-section',
         'sections.products-slider',
         'sections.features',
         'sections.contact-form',
+        'sections.bottle-usage',
       ]
     >;
     seo: Schema.Attribute.Component<'shared.seo', false>;
@@ -882,6 +886,37 @@ export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiProductUsageProductUsage
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'product_usages';
+  info: {
+    description: 'Ur\u010Den\u00ED produktu \u2014 pro co je sirup vhodn\u00FD (limon\u00E1dy, koktejly, ...)';
+    displayName: 'Ur\u010Den\u00ED produktu';
+    pluralName: 'product-usages';
+    singularName: 'product-usage';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::product-usage.product-usage'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    products: Schema.Attribute.Relation<'manyToMany', 'api::product.product'>;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
@@ -899,6 +934,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     };
   };
   attributes: {
+    badges: Schema.Attribute.Relation<'manyToMany', 'api::badge.badge'>;
     calculation: Schema.Attribute.Component<'shop.calculation', true> &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
@@ -997,6 +1033,10 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    usages: Schema.Attribute.Relation<
+      'manyToMany',
+      'api::product-usage.product-usage'
+    >;
     variants: Schema.Attribute.Component<'shop.product-variant', true>;
   };
 }
@@ -1151,7 +1191,98 @@ export interface ApiWholesalePageWholesalePage extends Struct.SingleTypeSchema {
           preset: 'defaultHtml';
         }
       >;
+    subtitle: Schema.Attribute.String;
     title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiWithdrawalPageWithdrawalPage
+  extends Struct.SingleTypeSchema {
+  collectionName: 'withdrawal_pages';
+  info: {
+    description: 'Odstoupen\u00ED od smlouvy page content';
+    displayName: 'Withdrawal Page';
+    pluralName: 'withdrawal-pages';
+    singularName: 'withdrawal-page';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'defaultHtml';
+        }
+      >;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::withdrawal-page.withdrawal-page'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    returnAddress: Schema.Attribute.String;
+    seo: Schema.Attribute.Component<'shared.seo', false>;
+    subtitle: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    warningText: Schema.Attribute.RichText &
+      Schema.Attribute.CustomField<
+        'plugin::ckeditor5.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'defaultHtml';
+        }
+      >;
+  };
+}
+
+export interface ApiWithdrawalRequestWithdrawalRequest
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'withdrawal_requests';
+  info: {
+    description: 'Odstoupen\u00ED od smlouvy \u2014 customer withdrawal requests';
+    displayName: 'Withdrawal Request';
+    pluralName: 'withdrawal-requests';
+    singularName: 'withdrawal-request';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    bankAccount: Schema.Attribute.String & Schema.Attribute.Required;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    email: Schema.Attribute.Email & Schema.Attribute.Required;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::withdrawal-request.withdrawal-request'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String & Schema.Attribute.Required;
+    order: Schema.Attribute.Relation<'manyToOne', 'api::order.order'>;
+    orderNumber: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    requestStatus: Schema.Attribute.Enumeration<
+      ['new', 'processing', 'approved', 'rejected', 'refunded']
+    > &
+      Schema.Attribute.DefaultTo<'new'>;
+    returnedItems: Schema.Attribute.Text;
+    unopenedConfirmed: Schema.Attribute.Boolean &
+      Schema.Attribute.DefaultTo<false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1679,11 +1810,14 @@ declare module '@strapi/strapi' {
       'api::info-page.info-page': ApiInfoPageInfoPage;
       'api::navigation.navigation': ApiNavigationNavigation;
       'api::order.order': ApiOrderOrder;
+      'api::product-usage.product-usage': ApiProductUsageProductUsage;
       'api::product.product': ApiProductProduct;
       'api::recipe.recipe': ApiRecipeRecipe;
       'api::review.review': ApiReviewReview;
       'api::wholesale-contact.wholesale-contact': ApiWholesaleContactWholesaleContact;
       'api::wholesale-page.wholesale-page': ApiWholesalePageWholesalePage;
+      'api::withdrawal-page.withdrawal-page': ApiWithdrawalPageWithdrawalPage;
+      'api::withdrawal-request.withdrawal-request': ApiWithdrawalRequestWithdrawalRequest;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

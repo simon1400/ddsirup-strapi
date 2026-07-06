@@ -1,0 +1,49 @@
+{
+  "kind": "collectionType",
+  "collectionName": "withdrawal_requests",
+  "info": {
+    "singularName": "withdrawal-request",
+    "pluralName": "withdrawal-requests",
+    "displayName": "Withdrawal Request",
+    "description": "Odstoupení od smlouvy — customer withdrawal requests"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "orderNumber": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "bankAccount": {
+      "type": "string",
+      "required": true
+    },
+    "returnedItems": {
+      "type": "text"
+    },
+    "unopenedConfirmed": {
+      "type": "boolean",
+      "default": false
+    },
+    "requestStatus": {
+      "type": "enumeration",
+      "enum": ["new", "processing", "approved", "rejected", "refunded"],
+      "default": "new"
+    },
+    "order": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::order.order"
+    }
+  }
+}

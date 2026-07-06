@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_sections_bottle_usages",
+  "info": {
+    "displayName": "Bottle Usage",
+    "icon": "chartBubble",
+    "description": "\"Z jednoho litru sirupu\" — bottle photo with radiating usage counts"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "bottleImage": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": ["images"]
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "elements.usage-item"
+    }
+  }
+}

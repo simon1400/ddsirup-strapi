@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_elements_usage_items",
+  "info": {
+    "displayName": "Usage Item",
+    "icon": "bulletList",
+    "description": "One \"25× limonád\" line of the bottle usage section"
+  },
+  "options": {},
+  "attributes": {
+    "count": {
+      "type": "string",
+      "required": true
+    },
+    "label": {
+      "type": "string",
+      "required": true
+    }
+  }
+}

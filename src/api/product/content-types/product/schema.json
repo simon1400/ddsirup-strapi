@@ -148,6 +148,18 @@
       },
       "component": "shop.maintenance",
       "repeatable": false
+    },
+    "usages": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product-usage.product-usage",
+      "inversedBy": "products"
+    },
+    "badges": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::badge.badge",
+      "inversedBy": "products"
     }
   }
 }

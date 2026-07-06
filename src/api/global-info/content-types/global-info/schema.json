@@ -71,6 +71,9 @@
     },
     "contactFromEmail": {
       "type": "string"
+    },
+    "claimsEmail": {
+      "type": "email"
     }
   }
 }

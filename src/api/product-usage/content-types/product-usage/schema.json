@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_usages",
+  "info": {
+    "singularName": "product-usage",
+    "pluralName": "product-usages",
+    "displayName": "Určení produktu",
+    "description": "Určení produktu — pro co je sirup vhodný (limonády, koktejly, ...)"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "products": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::product.product",
+      "mappedBy": "usages"
+    }
+  }
+}
