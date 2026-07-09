@@ -11,7 +11,17 @@
       "enum": [
         "Limonáda",
         "Koktejl",
-        "Jogurt"
+        "Jogurt",
+        "Káva",
+        "Horký nápoj",
+        "Espresso tonic",
+        "Ice tea",
+        "Shoty",
+        "Nealko drinky",
+        "Soda",
+        "Americká limonáda",
+        "Chupito",
+        "Matcha"
       ]
     },
     "amount": {

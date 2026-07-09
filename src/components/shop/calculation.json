@@ -15,7 +15,17 @@
       "enum": [
         "limonáda",
         "koktejl",
-        "jogurt"
+        "jogurt",
+        "káva",
+        "horký nápoj",
+        "espresso tonic",
+        "ice tea",
+        "shoty",
+        "nealko drinky",
+        "soda",
+        "americká limonáda",
+        "chupito",
+        "matcha"
       ]
     }
   },
