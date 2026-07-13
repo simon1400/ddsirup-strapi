@@ -60,11 +60,6 @@
       "component": "shared.seo",
       "repeatable": false
     },
-    "reviews": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::review.review"
-    },
     "partnersNumber": {
       "type": "integer"
     }

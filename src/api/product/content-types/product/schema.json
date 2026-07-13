@@ -133,12 +133,6 @@
       "component": "shared.seo",
       "repeatable": false
     },
-    "reviews": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::review.review",
-      "inversedBy": "products"
-    },
     "maintenance": {
       "type": "component",
       "pluginOptions": {
