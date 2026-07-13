@@ -154,6 +154,10 @@
       "relation": "manyToMany",
       "target": "api::badge.badge",
       "inversedBy": "products"
+    },
+    "sortOrder": {
+      "type": "integer",
+      "default": 0
     }
   }
 }
