@@ -25,13 +25,12 @@
       "required": true
     },
     "bankAccount": {
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "returnedItems": {
       "type": "text"
     },
-    "unopenedConfirmed": {
+    "conditionsConfirmed": {
       "type": "boolean",
       "default": false
     },

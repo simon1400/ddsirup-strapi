@@ -10,12 +10,12 @@ export default factories.createCoreController('api::withdrawal-request.withdrawa
         email?: string;
         bankAccount?: string;
         returnedItems?: string;
-        unopenedConfirmed?: boolean;
+        conditionsConfirmed?: boolean;
         orderDocumentId?: string;
       };
     };
 
-    if (!data?.name || !data?.orderNumber || !data?.email || !data?.bankAccount) {
+    if (!data?.name || !data?.orderNumber || !data?.email) {
       return ctx.badRequest('Missing required fields');
     }
 
@@ -25,9 +25,9 @@ export default factories.createCoreController('api::withdrawal-request.withdrawa
         name: data.name,
         orderNumber: data.orderNumber,
         email: data.email,
-        bankAccount: data.bankAccount,
+        bankAccount: data.bankAccount ?? null,
         returnedItems: data.returnedItems ?? null,
-        unopenedConfirmed: !!data.unopenedConfirmed,
+        conditionsConfirmed: !!data.conditionsConfirmed,
         requestStatus: 'new',
         ...(data.orderDocumentId ? { order: { connect: [data.orderDocumentId] } } : {}),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
